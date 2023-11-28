@@ -12,9 +12,8 @@ WORKDIR /workspace
 # Create a folder named "env"
 RUN mkdir env
 
-# Create and activate Python virtual environment
-RUN python -m venv env \
-    pip install transformers
+# Create Python virtual environment
+RUN python -m venv env
 
 # Enable passwordless ssh login
 RUN mkdir /var/run/sshd
@@ -28,7 +27,8 @@ RUN echo 'ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDwi3RMUccCbo0xUSxqvdu+ME7q51jMMl4
 # Expose the SSH port
 EXPOSE 22
 
-# Your additional configurations or installations can go here
+# Install Transformers
+RUN . /workspace/env/bin/activate && pip install transformers
 
 # Command to run when the container starts
 CMD ["/usr/sbin/sshd", "-D"]
