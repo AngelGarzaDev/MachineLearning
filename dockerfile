@@ -1,10 +1,12 @@
 # Use the official PyTorch base image
 FROM pytorch/pytorch:latest
 
-# Install vim and ssh server
+# Install vim, ssh server and git
 RUN apt-get update && \
-    apt-get install -y vim openssh-server && \
-    rm -rf /var/lib/apt/lists/*
+    apt-get install -y vim openssh-server git && \
+    rm -rf /var/lib/apt/lists/* \
+    git config --global user.name "Angel Gonzalez Garza" \ 
+    git config --global user.email "aagarza@proton.me"
 
 # Set the working directory
 WORKDIR /workspace
